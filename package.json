@@ -23,7 +23,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "react-scripts build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,7 +44,9 @@
   },
   "devDependencies": {
     "@types/json5": "^0.0.30",
-    "@types/ramda": "^0.27.7"
+    "@types/ramda": "^0.27.7",
+    "gh-pages": "^3.1.0"
   },
+  "homepage": "http://ronyhe.github.io/schema-golf",
   "license": "MIT"
 }
