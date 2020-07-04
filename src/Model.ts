@@ -6,7 +6,6 @@ const validator: ajv.Ajv = ajv()
 
 export interface Level {
     readonly error: string | null
-    readonly schemaText: string
     readonly shouldAccept: ReadonlyArray<Example>
     readonly shouldReject: ReadonlyArray<Example>
 }
@@ -31,13 +30,12 @@ export function example(datum: any): Example {
     return {datum, result: ExampleResult.None}
 }
 
-function levelFromExamples(examples: [any[], any[]], index: number): Level {
+function levelFromExamples(examples: [any[], any[]]): Level {
     const [accept, reject] = examples
     return {
         shouldAccept: accept.map(example),
         shouldReject: reject.map(example),
-        error: null,
-        schemaText: '{}'
+        error: null
     }
 }
 
@@ -68,14 +66,12 @@ function updateLevel(newSchemaText: string, level: Level): Level {
         const updateWithSchema = curry(updateExample)(schemaObject)
         return {
             error: null,
-            schemaText: newSchemaText,
             shouldAccept: level.shouldAccept.map(updateWithSchema(true)),
             shouldReject: level.shouldReject.map(updateWithSchema(false))
         }
     } catch (e) {
         return {
             error: 'Cannot parse json5',
-            schemaText: newSchemaText,
             shouldAccept: level.shouldAccept.map(setResultToBad),
             shouldReject: level.shouldReject.map(setResultToBad)
         }

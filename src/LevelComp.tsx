@@ -26,7 +26,7 @@ function exampleToProps({datum, result}: Example): DataExampleProps {
 }
 
 export const LevelComp: React.FunctionComponent<LevelProps> = ({level, onApplySchema}) => {
-    const [schemaText, setSchemaText] = useState<string>(level.schemaText)
+    const [schemaText, setSchemaText] = useState<string>('{}')
     const error = level.error === null ? null : (
         <h3 style={{color: 'red'}}>{level.error}</h3>
     )
