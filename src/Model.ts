@@ -52,7 +52,7 @@ const setResultToBad: (ex: Example) => Example = setResult(ExampleResult.Bad)
 function updateExample(schemaObject: any, shouldPass: boolean, example: Example): Example {
     try {
         const valid = validator.validate(schemaObject, example.datum)
-        const correct = valid && shouldPass
+        const correct = shouldPass ? valid : !valid
         const result = correct ? ExampleResult.Good : ExampleResult.Bad
         return setResult(result)(example)
     } catch (e) {
