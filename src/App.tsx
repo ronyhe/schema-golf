@@ -4,18 +4,9 @@ import './App.css';
 import {GolfApp} from "./GolfApp";
 import {appFromExamples, applySchema, AppModel, changeLevel} from "./Model";
 import {curry} from "ramda";
+import {examples} from "./Examples";
 
-const defaultModel = appFromExamples([
-  [
-    ['some string', 'some other string'],
-    [5, {a: 4}]
-  ],
-  [
-    [5, 10],
-    ['5', {a: 4}]
-  ],
-  [[], []]
-])
+const defaultModel = appFromExamples(examples)
 
 function App() {
   const [model, setModel] = useState<AppModel>(defaultModel)
