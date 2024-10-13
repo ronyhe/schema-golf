@@ -1,13 +1,11 @@
 {
-  "name": "web-template",
+  "name": "schema-golf",
   "version": "0.0.1",
-  "description": "Web project template",
+  "description": "Learn JSON schema",
   "type": "module",
   "keywords": [
-    "web",
-    "react",
-    "typescript",
-    "template"
+    "json schema",
+    "schema golf"
   ],
   "license": "MIT",
   "scripts": {

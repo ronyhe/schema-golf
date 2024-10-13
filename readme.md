@@ -1,5 +1,5 @@
-# Web Template
-A starter template for web development projects, to my liking.
+# Schema Golf
+Learn JSON Schema!
 
 # Bundler - Parcel
 Low config is a win here for me. I use this template for small projects, so I'm not worried about hitting a performance wall.
@@ -15,9 +15,3 @@ No real competition here
 # Prerequisites
 - Node.js, version specified in `.nvmrc`
 - jq and sponge (Hopefully, temporary, see Testing)
-
-# What to change?
-Of course, feel free to alter anything to your liking, but these are just plain wrong for other projects:
-- Lines 1-12 (inclusive) in `package.json`. In particular, the `license` field may have legal ramifications.
-- The readme file
-- The .git folder
