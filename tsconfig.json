@@ -1,0 +1,21 @@
+{
+  "include": ["src", "test", "app"],
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "jsx": "react",
+    "moduleResolution": "NodeNext",
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "typeRoots": ["node_modules/@types", "./test/tools/custom-matchers.d.ts"],
+    "paths": {
+      "#comps/*": ["./src/components/*"],
+      "#logic/*": ["./src/logic/*.ts"],
+      "#test": ["./test/tools/test.ts"],
+      "#render": ["./test/tools/render.ts"]
+    }
+  },
+}
