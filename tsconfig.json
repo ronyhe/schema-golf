@@ -9,6 +9,7 @@
     "jsx": "react",
     "moduleResolution": "NodeNext",
     "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "typeRoots": ["node_modules/@types", "./test/tools/custom-matchers.d.ts"],
     "paths": {
