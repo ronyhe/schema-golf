@@ -15,7 +15,9 @@
       "#comps/*": ["./src/components/*"],
       "#logic/*": ["./src/logic/*.ts"],
       "#test": ["./test/tools/test.ts"],
-      "#render": ["./test/tools/render.ts"]
+      "#render": ["./test/tools/render.ts"],
+      "#mui/*": ["./node_modules/@mui/material/*"],
+      "#mui-icons/*": ["./node_modules/@mui/icons-material/*"]
     }
   },
 }

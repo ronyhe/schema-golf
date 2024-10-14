@@ -1,8 +1,12 @@
 import 'global-jsdom/register'
 import { ReactNode } from 'react'
-import { render as baseRender, screen, cleanup } from '@testing-library/react'
-import { userEvent, UserEvent } from '@testing-library/user-event'
-import { test, TestContext } from '#test'
+import {
+    render as baseRender,
+    screen,
+    cleanup as _cleanup
+} from '@testing-library/react'
+import userEvent, { UserEvent } from '@testing-library/user-event'
+
 export type Screen = typeof screen
 
 interface TestSetup {
@@ -18,9 +22,4 @@ export function render(ui: ReactNode): TestSetup {
     }
 }
 
-export async function renderTests(fn: (t: TestContext) => Promise<void>) {
-    await test(async t => {
-        t.afterEach(cleanup)
-        await fn(t)
-    })
-}
+export const cleanup = _cleanup
