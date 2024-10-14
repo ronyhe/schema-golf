@@ -1,11 +1,8 @@
 {
-  "name": "watney",
+  "name": "schema-golf",
   "version": "0.0.1",
-  "description": "Mark Watney ASCII Simulator",
-  "keywords": [
-    "mark watney",
-    "the martian"
-  ],
+  "description": "Learn JSON schema for fun and profit",
+  "keywords": [],
   "license": "MIT",
   "scripts": {
     "lint": "eslint",
