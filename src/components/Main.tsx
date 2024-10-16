@@ -63,7 +63,7 @@ function Examples({ level }: { level: Level }) {
     return (
         <Box>
             <Box>
-                <Typography variant='h6'>Valid examples</Typography>
+                <Typography variant='h6'>Should Pass</Typography>
                 <List>
                     {level.valid.map((example, i) => (
                         <ListItem key={i}>{JSON.stringify(example)}</ListItem>
@@ -71,7 +71,7 @@ function Examples({ level }: { level: Level }) {
                 </List>
             </Box>
             <Box>
-                <Typography variant='h6'>Invalid examples</Typography>
+                <Typography variant='h6'>Should Fail</Typography>
                 <List>
                     {level.invalid.map((example, i) => (
                         <ListItem key={i}>{JSON.stringify(example)}</ListItem>
