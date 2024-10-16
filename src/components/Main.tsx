@@ -5,6 +5,8 @@ import Typography from '#mui/Typography'
 import List from '#mui/List'
 import ListItem from '#mui/ListItem'
 import { NonEmptyArray } from '#logic/utils'
+import Tabs from '#mui/Tabs'
+import Tab from '#mui/Tab'
 
 export interface Level {
     valid: unknown[]
@@ -25,6 +27,15 @@ export function Main({ levels }: MainProps) {
                 height: '100%'
             }}
         >
+            <Tabs
+                value={currentLevel}
+                onChange={(_, value) => _setCurrentLevel(value)}
+                centered
+            >
+                {levels.map((_, i) => (
+                    <Tab label={`Level ${i + 1}`} key={i}></Tab>
+                ))}
+            </Tabs>
             <CodeEditor />
             <Examples level={levels[currentLevel]} />
         </Box>
