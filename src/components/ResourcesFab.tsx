@@ -106,7 +106,7 @@ function ResourcesCard() {
             >
                 You can always use the
                 <Link sx={{ paddingLeft: 1 }} href={base}>
-                    JSON schema reference
+                    JSON schema reference:
                 </Link>
             </Typography>
             <List>
