@@ -1,5 +1,5 @@
 import React from 'react'
-import { Main } from '#comps/Main'
+import { Level, Main } from '#comps/Main'
 import { createRoot } from 'react-dom/client'
 import { CssBaseline } from '@mui/material'
 import examples from './examples.json'
@@ -11,11 +11,10 @@ import '@fontsource/roboto/700.css'
 document.addEventListener('DOMContentLoaded', main)
 
 async function main() {
-    console.log(examples)
     const root = createRoot(document.querySelector('#app')!)
     root.render(
         <CssBaseline>
-            <Main />
+            <Main levels={examples as unknown as Level[]} />
         </CssBaseline>
     )
 }
