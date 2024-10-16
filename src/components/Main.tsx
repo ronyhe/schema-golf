@@ -26,11 +26,7 @@ export function Main({ levels }: MainProps) {
     const [levelIndex, _setLevelIndex] = useState(0)
     const level = levels[levelIndex]
     return (
-        <Box
-            sx={{
-                padding: 2
-            }}
-        >
+        <Box padding={2}>
             <AppBar
                 position='static'
                 sx={{
