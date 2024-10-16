@@ -17,57 +17,70 @@ export interface MainProps {
 
 export function Main({ levels }: MainProps) {
     const [currentLevel, _setCurrentLevel] = useState(0)
-    const { valid, invalid } = levels[currentLevel]
+    return (
+        <Box
+            sx={{
+                padding: 2,
+                width: '100%',
+                height: '100%'
+            }}
+        >
+            <CodeEditor />
+            <Examples level={levels[currentLevel]} />
+        </Box>
+    )
+}
+
+function Examples({ level }: { level: Level }) {
     return (
         <Box>
-            <Box
-                sx={{
-                    height: '50vh',
-                    width: '60vh',
-                    border: '1px solid black'
-                }}
-            >
-                <Editor
-                    language='json'
-                    defaultValue='{"text": "Hello, world!"}'
-                    options={{
-                        lineNumbers: 'off',
-                        overviewRulerBorder: false,
-                        minimap: {
-                            enabled: false
-                        },
-                        lineDecorationsWidth: 0,
-                        fontSize: 16,
-                        formatOnType: true,
-                        autoClosingBrackets: 'languageDefined',
-                        scrollbar: {
-                            vertical: 'hidden'
-                        }
-                    }}
-                />
+            <Box>
+                <Typography variant='h6'>Valid examples</Typography>
+                <List>
+                    {level.valid.map((example, i) => (
+                        <ListItem key={i}>{JSON.stringify(example)}</ListItem>
+                    ))}
+                </List>
             </Box>
             <Box>
-                <Box>
-                    <Typography variant='h6'>Valid examples</Typography>
-                    <List>
-                        {valid.map((example, i) => (
-                            <ListItem key={i}>
-                                {JSON.stringify(example)}
-                            </ListItem>
-                        ))}
-                    </List>
-                </Box>
-                <Box>
-                    <Typography variant='h6'>Invalid examples</Typography>
-                    <List>
-                        {invalid.map((example, i) => (
-                            <ListItem key={i}>
-                                {JSON.stringify(example)}
-                            </ListItem>
-                        ))}
-                    </List>
-                </Box>
+                <Typography variant='h6'>Invalid examples</Typography>
+                <List>
+                    {level.invalid.map((example, i) => (
+                        <ListItem key={i}>{JSON.stringify(example)}</ListItem>
+                    ))}
+                </List>
             </Box>
+        </Box>
+    )
+}
+
+function CodeEditor() {
+    return (
+        <Box
+            sx={{
+                height: '50vh',
+                width: '60vh',
+                border: '1px solid black'
+            }}
+        >
+            <Editor
+                language='json'
+                defaultValue='{"text": "Hello, world!"}'
+                options={{
+                    lineNumbers: 'off',
+                    overviewRulerBorder: false,
+                    minimap: {
+                        enabled: false
+                    },
+                    lineDecorationsWidth: 0,
+                    fontSize: 16,
+                    formatOnType: true,
+                    autoClosingBrackets: 'languageDefined',
+                    scrollbar: {
+                        vertical: 'hidden'
+                    }
+                }}
+            />
         </Box>
     )
 }
