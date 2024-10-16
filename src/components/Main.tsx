@@ -114,22 +114,63 @@ function CodeEditor() {
 }
 
 function Resources() {
+    const base = 'https://json-schema.org/understanding-json-schema/reference/'
+    const links = [
+        {
+            title: 'string',
+            slug: 'string'
+        },
+        {
+            title: 'RegEx',
+            slug: 'regular_expressions'
+        },
+        {
+            title: 'numbers',
+            slug: 'numeric'
+        },
+        {
+            title: 'object',
+            slug: 'object'
+        },
+        {
+            title: 'array',
+            slug: 'array'
+        },
+        {
+            title: 'boolean',
+            slug: 'boolean'
+        },
+        {
+            title: 'null',
+            slug: 'null'
+        },
+        {
+            title: 'Enumerated Values (enum)',
+            slug: 'enum'
+        },
+        {
+            title: 'Schema Composition',
+            slug: 'combining'
+        }
+    ]
     return (
-        <Card elevation={2} sx={{ padding: 2, width: '30%' }}>
+        <Card elevation={2} sx={{ padding: 2 }}>
             <Typography
                 gutterBottom
                 sx={{ color: 'text.secondary', fontSize: 14 }}
             >
-                Don't forget the
-                <Link
-                    sx={{ paddingLeft: 1 }}
-                    href={
-                        'https://json-schema.org/understanding-json-schema/reference'
-                    }
-                >
+                You can always use the
+                <Link sx={{ paddingLeft: 1 }} href={base}>
                     JSON schema reference
                 </Link>
             </Typography>
+            <List>
+                {links.map(({ title, slug }) => (
+                    <ListItem key={slug}>
+                        <Link href={`${base}${slug}`}>{title}</Link>
+                    </ListItem>
+                ))}
+            </List>
         </Card>
     )
 }
