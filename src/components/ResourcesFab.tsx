@@ -46,7 +46,9 @@ export function ResourcesFab() {
                         vertical: 'bottom',
                         horizontal: 'left'
                     }}
-                ></Popover>
+                >
+                    <ResourcesCard />
+                </Popover>
             </Fab>
         </Box>
     )
