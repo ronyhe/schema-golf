@@ -8,6 +8,7 @@ import { NonEmptyArray } from '#logic/utils'
 import Tabs from '#mui/Tabs'
 import Tab from '#mui/Tab'
 import AppBar from '#mui/AppBar'
+import Stack from '#mui/Stack'
 
 export interface Level {
     valid: unknown[]
@@ -46,8 +47,10 @@ export function Main({ levels }: MainProps) {
                 </Tabs>
             </AppBar>
             <Box padding={2}>
-                <CodeEditor />
-                <Examples level={levels[currentLevel]} />
+                <Stack direction={'row'} spacing={2}>
+                    <CodeEditor />
+                    <Examples level={levels[currentLevel]} />
+                </Stack>
             </Box>
         </Box>
     )
