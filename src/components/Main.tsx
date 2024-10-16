@@ -4,6 +4,7 @@ import Editor from '@monaco-editor/react'
 import Typography from '#mui/Typography'
 import List from '#mui/List'
 import ListItem from '#mui/ListItem'
+import { NonEmptyArray } from '#logic/utils'
 
 export interface Level {
     valid: unknown[]
@@ -11,7 +12,7 @@ export interface Level {
 }
 
 export interface MainProps {
-    levels: Level[]
+    levels: NonEmptyArray<Level>
 }
 
 export function Main({ levels }: MainProps) {
