@@ -5,7 +5,10 @@ import Typography from '#mui/Typography'
 import List from '#mui/List'
 import ListItem from '#mui/ListItem'
 
-export type Level = [valid: unknown[], invalid: unknown[]][]
+export interface Level {
+    valid: unknown[]
+    invalid: unknown[]
+}
 
 export interface MainProps {
     levels: Level[]
@@ -13,7 +16,7 @@ export interface MainProps {
 
 export function Main({ levels }: MainProps) {
     const [currentLevel, _setCurrentLevel] = useState(0)
-    const [validExamples, invalidExamples] = levels[currentLevel]
+    const { valid, invalid } = levels[currentLevel]
     return (
         <Box>
             <Box
@@ -46,7 +49,7 @@ export function Main({ levels }: MainProps) {
                 <Box>
                     <Typography variant='h6'>Valid examples</Typography>
                     <List>
-                        {validExamples.map((example, i) => (
+                        {valid.map((example, i) => (
                             <ListItem key={i}>
                                 {JSON.stringify(example)}
                             </ListItem>
@@ -56,7 +59,7 @@ export function Main({ levels }: MainProps) {
                 <Box>
                     <Typography variant='h6'>Invalid examples</Typography>
                     <List>
-                        {invalidExamples.map((example, i) => (
+                        {invalid.map((example, i) => (
                             <ListItem key={i}>
                                 {JSON.stringify(example)}
                             </ListItem>

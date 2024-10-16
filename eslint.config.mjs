@@ -19,7 +19,7 @@ export default [
             ]
         }
     },
-    { ignores: ['dist', '.parcel-cache'] },
+    { ignores: ['dist', '.parcel-cache', 'node_modules'] },
     { languageOptions: { globals: globals.browser } },
     pluginJs.configs.recommended,
     ...tseslint.configs.recommended,
