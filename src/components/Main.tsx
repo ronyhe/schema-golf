@@ -7,6 +7,7 @@ import ListItem from '#mui/ListItem'
 import { NonEmptyArray } from '#logic/utils'
 import Tabs from '#mui/Tabs'
 import Tab from '#mui/Tab'
+import AppBar from '#mui/AppBar'
 
 export interface Level {
     valid: unknown[]
@@ -27,17 +28,27 @@ export function Main({ levels }: MainProps) {
                 height: '100%'
             }}
         >
-            <Tabs
-                value={currentLevel}
-                onChange={(_, value) => _setCurrentLevel(value)}
-                centered
+            <AppBar
+                position='static'
+                sx={{
+                    backgroundColor: 'transparent'
+                }}
             >
-                {levels.map((_, i) => (
-                    <Tab label={`Level ${i + 1}`} key={i}></Tab>
-                ))}
-            </Tabs>
-            <CodeEditor />
-            <Examples level={levels[currentLevel]} />
+                <Tabs
+                    value={currentLevel}
+                    onChange={(_, value) => _setCurrentLevel(value)}
+                    centered
+                    textColor={'primary'}
+                >
+                    {levels.map((_, i) => (
+                        <Tab label={`Level ${i + 1}`} key={i}></Tab>
+                    ))}
+                </Tabs>
+            </AppBar>
+            <Box padding={2}>
+                <CodeEditor />
+                <Examples level={levels[currentLevel]} />
+            </Box>
         </Box>
     )
 }
