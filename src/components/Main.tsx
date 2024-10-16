@@ -10,6 +10,8 @@ import Tab from '#mui/Tab'
 import AppBar from '#mui/AppBar'
 import Stack from '#mui/Stack'
 import { ResourcesFab } from '#comps/ResourcesFab'
+import Card from '#mui/Card'
+import { CardHeader } from '@mui/material'
 
 export interface Level {
     valid: unknown[]
@@ -21,13 +23,12 @@ export interface MainProps {
 }
 
 export function Main({ levels }: MainProps) {
-    const [currentLevel, _setCurrentLevel] = useState(0)
+    const [levelIndex, _setLevelIndex] = useState(0)
+    const level = levels[levelIndex]
     return (
         <Box
             sx={{
-                padding: 2,
-                width: '100%',
-                height: '100%'
+                padding: 2
             }}
         >
             <AppBar
@@ -37,8 +38,8 @@ export function Main({ levels }: MainProps) {
                 }}
             >
                 <Tabs
-                    value={currentLevel}
-                    onChange={(_, value) => _setCurrentLevel(value)}
+                    value={levelIndex}
+                    onChange={(_, value) => _setLevelIndex(value)}
                     centered
                     textColor={'primary'}
                 >
@@ -50,33 +51,11 @@ export function Main({ levels }: MainProps) {
             <Box padding={2}>
                 <Stack direction='row' spacing={2}>
                     <CodeEditor />
-                    <Examples level={levels[currentLevel]} />
+                    <ExampleCard examples={level.valid} title='Should Pass' />
+                    <ExampleCard examples={level.invalid} title='Should Fail' />
                 </Stack>
             </Box>
             <ResourcesFab />
-        </Box>
-    )
-}
-
-function Examples({ level }: { level: Level }) {
-    return (
-        <Box>
-            <Box>
-                <Typography variant='h6'>Should Pass</Typography>
-                <List>
-                    {level.valid.map((example, i) => (
-                        <ListItem key={i}>{JSON.stringify(example)}</ListItem>
-                    ))}
-                </List>
-            </Box>
-            <Box>
-                <Typography variant='h6'>Should Fail</Typography>
-                <List>
-                    {level.invalid.map((example, i) => (
-                        <ListItem key={i}>{JSON.stringify(example)}</ListItem>
-                    ))}
-                </List>
-            </Box>
         </Box>
     )
 }
@@ -109,5 +88,24 @@ function CodeEditor() {
                 }}
             />
         </Box>
+    )
+}
+
+function ExampleCard({
+    examples,
+    title
+}: {
+    examples: unknown[]
+    title: string
+}) {
+    return (
+        <Card elevation={2}>
+            <CardHeader title={<Typography variant='h6'>{title}</Typography>} />
+            <List>
+                {examples.map((example, i) => (
+                    <ListItem key={i}>{JSON.stringify(example)}</ListItem>
+                ))}
+            </List>
+        </Card>
     )
 }
