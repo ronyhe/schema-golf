@@ -9,6 +9,8 @@ import Tabs from '#mui/Tabs'
 import Tab from '#mui/Tab'
 import AppBar from '#mui/AppBar'
 import Stack from '#mui/Stack'
+import Card from '#mui/Card'
+import Link from '#mui/Link'
 
 export interface Level {
     valid: unknown[]
@@ -51,6 +53,7 @@ export function Main({ levels }: MainProps) {
                     <CodeEditor />
                     <Examples level={levels[currentLevel]} />
                 </Stack>
+                <Resources />
             </Box>
         </Box>
     )
@@ -107,5 +110,26 @@ function CodeEditor() {
                 }}
             />
         </Box>
+    )
+}
+
+function Resources() {
+    return (
+        <Card elevation={2} sx={{ padding: 2, width: '30%' }}>
+            <Typography
+                gutterBottom
+                sx={{ color: 'text.secondary', fontSize: 14 }}
+            >
+                Don't forget the
+                <Link
+                    sx={{ paddingLeft: 1 }}
+                    href={
+                        'https://json-schema.org/understanding-json-schema/reference'
+                    }
+                >
+                    JSON schema reference
+                </Link>
+            </Typography>
+        </Card>
     )
 }
