@@ -1,20 +1,13 @@
 import React, { useState } from 'react'
 import Box from '#mui/Box'
 import Editor from '@monaco-editor/react'
-import Typography from '#mui/Typography'
-import List from '#mui/List'
-import ListItem from '#mui/ListItem'
 import { NonEmptyArray } from '#logic/utils'
 import Tabs from '#mui/Tabs'
 import Tab from '#mui/Tab'
 import AppBar from '#mui/AppBar'
 import Stack from '#mui/Stack'
 import { ResourcesFab } from '#comps/ResourcesFab'
-import Card from '#mui/Card'
-import { CardHeader } from '@mui/material'
-import ListItemIcon from '#mui/ListItemIcon'
-import CheckIcon from '@mui/icons-material/Check'
-import ListItemText from '#mui/ListItemText'
+import { ExampleCard } from '#comps/ExampleCard'
 
 export interface Level {
     valid: unknown[]
@@ -55,9 +48,21 @@ export function Main({ levels }: MainProps) {
                         justifyContent: 'center'
                     }}
                 >
-                    <ExampleCard examples={level.valid} title='Should Pass' />
+                    <ExampleCard
+                        examples={level.valid.map(value => ({
+                            value,
+                            status: 'unknown'
+                        }))}
+                        title='Should Pass'
+                    />
                     <CodeEditor />
-                    <ExampleCard examples={level.invalid} title='Should Fail' />
+                    <ExampleCard
+                        examples={level.invalid.map(value => ({
+                            value,
+                            status: 'unknown'
+                        }))}
+                        title='Should Fail'
+                    />
                 </Stack>
             </Box>
             <ResourcesFab />
@@ -93,29 +98,5 @@ function CodeEditor() {
                 }}
             />
         </Box>
-    )
-}
-
-function ExampleCard({
-    examples,
-    title
-}: {
-    examples: unknown[]
-    title: string
-}) {
-    return (
-        <Card elevation={2}>
-            <CardHeader title={<Typography variant='h6'>{title}</Typography>} />
-            <List dense>
-                {examples.map((example, i) => (
-                    <ListItem key={i}>
-                        <ListItemIcon>
-                            <CheckIcon fontSize='small' />
-                        </ListItemIcon>
-                        <ListItemText primary={JSON.stringify(example)} />
-                    </ListItem>
-                ))}
-            </List>
-        </Card>
     )
 }
