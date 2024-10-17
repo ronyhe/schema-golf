@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import Box from '#mui/Box'
 import Editor from '@monaco-editor/react'
-import { NonEmptyArray } from '#logic/utils'
+import { attempt, NonEmptyArray } from '#logic/utils'
 import Tabs from '#mui/Tabs'
 import Tab from '#mui/Tab'
 import AppBar from '#mui/AppBar'
 import Stack from '#mui/Stack'
 import { ResourcesFab } from '#comps/ResourcesFab'
-import { ExampleCard } from '#comps/ExampleCard'
+import { ExampleCard, ExampleWithStatus } from '#comps/ExampleCard'
+import Ajv from 'ajv'
 
 export interface Level {
     valid: unknown[]
@@ -18,9 +19,17 @@ export interface MainProps {
     levels: NonEmptyArray<Level>
 }
 
+interface LevelWithStatus {
+    valid: ExampleWithStatus[]
+    invalid: ExampleWithStatus[]
+}
+
 export function Main({ levels }: MainProps) {
     const [levelIndex, _setLevelIndex] = useState(0)
     const level = levels[levelIndex]
+    const [text, setText] = useState('')
+    const stati = getExampleStati(level, text)
+
     return (
         <Box padding={2}>
             <AppBar
@@ -48,21 +57,9 @@ export function Main({ levels }: MainProps) {
                         justifyContent: 'center'
                     }}
                 >
-                    <ExampleCard
-                        examples={level.valid.map(value => ({
-                            value,
-                            status: 'unknown'
-                        }))}
-                        title='Should Pass'
-                    />
-                    <CodeEditor />
-                    <ExampleCard
-                        examples={level.invalid.map(value => ({
-                            value,
-                            status: 'unknown'
-                        }))}
-                        title='Should Fail'
-                    />
+                    <ExampleCard examples={stati.valid} title='Should Pass' />
+                    <CodeEditor onChange={setText} />
+                    <ExampleCard examples={stati.invalid} title='Should Fail' />
                 </Stack>
             </Box>
             <ResourcesFab />
@@ -70,7 +67,7 @@ export function Main({ levels }: MainProps) {
     )
 }
 
-function CodeEditor() {
+function CodeEditor({ onChange }: { onChange: (value: string) => void }) {
     return (
         <Box
             sx={{
@@ -80,6 +77,9 @@ function CodeEditor() {
             }}
         >
             <Editor
+                onChange={value => {
+                    onChange(value ?? '')
+                }}
                 language='json'
                 defaultValue='{}'
                 options={{
@@ -99,4 +99,35 @@ function CodeEditor() {
             />
         </Box>
     )
+}
+
+function getExampleStati(level: Level, text: string): LevelWithStatus {
+    const { valid, invalid } = level
+    const parsed = attempt(() => JSON.parse(text))
+    if (parsed.didFail) {
+        return allUnknown(level)
+    }
+    const ajv = new Ajv()
+    const compiled = attempt(() => ajv.compile(parsed.value))
+    if (compiled.didFail) {
+        return allUnknown(level)
+    }
+    return {
+        valid: valid.map(value => ({
+            value,
+            status: compiled.value!(value) ? 'passing' : 'failing'
+        })),
+        invalid: invalid.map(value => ({
+            value,
+            status: compiled.value!(value) ? 'failing' : 'passing'
+        }))
+    }
+}
+
+function allUnknown(level: Level): LevelWithStatus {
+    const { valid, invalid } = level
+    return {
+        valid: valid.map(value => ({ value, status: 'unknown' })),
+        invalid: invalid.map(value => ({ value, status: 'unknown' }))
+    }
 }

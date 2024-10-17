@@ -9,6 +9,7 @@ import ListItemText from '#mui/ListItemText'
 import CheckIcon from '#mui-icons/Check'
 import XIcon from '@mui/icons-material/Close'
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark'
+import { attempt } from '#logic/utils'
 
 export interface ExampleCardProps {
     examples: ExampleWithStatus[]
