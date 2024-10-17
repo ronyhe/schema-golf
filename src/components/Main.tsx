@@ -73,7 +73,7 @@ function CodeEditor() {
         >
             <Editor
                 language='json'
-                defaultValue='{"text": "Hello, world!"}'
+                defaultValue='{}'
                 options={{
                     lineNumbers: 'off',
                     overviewRulerBorder: false,
