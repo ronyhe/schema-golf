@@ -12,6 +12,9 @@ import Stack from '#mui/Stack'
 import { ResourcesFab } from '#comps/ResourcesFab'
 import Card from '#mui/Card'
 import { CardHeader } from '@mui/material'
+import ListItemIcon from '#mui/ListItemIcon'
+import CheckIcon from '@mui/icons-material/Check'
+import ListItemText from '#mui/ListItemText'
 
 export interface Level {
     valid: unknown[]
@@ -103,9 +106,14 @@ function ExampleCard({
     return (
         <Card elevation={2}>
             <CardHeader title={<Typography variant='h6'>{title}</Typography>} />
-            <List>
+            <List dense>
                 {examples.map((example, i) => (
-                    <ListItem key={i}>{JSON.stringify(example)}</ListItem>
+                    <ListItem key={i}>
+                        <ListItemIcon>
+                            <CheckIcon fontSize='small' />
+                        </ListItemIcon>
+                        <ListItemText primary={JSON.stringify(example)} />
+                    </ListItem>
                 ))}
             </List>
         </Card>
