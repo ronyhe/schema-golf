@@ -45,9 +45,15 @@ export function Main({ levels }: MainProps) {
                 </Tabs>
             </AppBar>
             <Box padding={2}>
-                <Stack direction='row' spacing={2}>
-                    <CodeEditor />
+                <Stack
+                    direction='row'
+                    spacing={2}
+                    sx={{
+                        justifyContent: 'center'
+                    }}
+                >
                     <ExampleCard examples={level.valid} title='Should Pass' />
+                    <CodeEditor />
                     <ExampleCard examples={level.invalid} title='Should Fail' />
                 </Stack>
             </Box>
