@@ -11,7 +11,8 @@
         "test": "node --import tsx --test **/**/*.test.tsx **/**/*.test.ts",
         "check": "npm run lint && npm run typecheck && npm run test",
         "start": "parcel ./app/index.html",
-        "build": "parcel build ./app/index.html",
+        "build": "parcel build ./app/index.html --public-url ./",
+        "deploy": "gh-pages -d dist",
         "clean": "rm -rf .parcel-cache dist",
         "postinstall": "jq '.exports.\"./build/spyMatchers\"=\"./build/spyMatchers.js\"' node_modules/expect/package.json | sponge node_modules/expect/package.json"
     },
@@ -47,6 +48,7 @@
         "eslint-plugin-prettier": "^5.2.1",
         "eslint-plugin-react": "^7.37.0",
         "expect": "^29.7.0",
+        "gh-pages": "^6.2.0",
         "global-jsdom": "^25.0.0",
         "globals": "^15.9.0",
         "parcel": "^2.12.0",
